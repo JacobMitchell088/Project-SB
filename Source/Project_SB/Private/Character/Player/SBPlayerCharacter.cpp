@@ -121,12 +121,16 @@ void ASBPlayerCharacter::TurnRate(float Value)
 
 void ASBPlayerCharacter::MoveForward(float Value)
 {
-	AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);
+	if (IsAlive()) {
+		AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);
+	}
 }
 
 void ASBPlayerCharacter::MoveRight(float Value)
 {
-	AddMovementInput(UKismetMathLibrary::GetRightVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);
+	if (IsAlive()) {
+		AddMovementInput(UKismetMathLibrary::GetRightVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);
+	}
 }
 
 void ASBPlayerCharacter::OnRep_PlayerState() 
@@ -137,7 +141,6 @@ void ASBPlayerCharacter::OnRep_PlayerState()
 	if (PS) {
 		InitializeStartingValues(PS);
 		BindASCInput();
-		InitializeAttributes();
 	}
 }
 
@@ -147,6 +150,7 @@ void ASBPlayerCharacter::InitializeStartingValues(ASBPlayerState* PS)
 	PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
 	AttributeSetBase = PS->GetAttributeSetBase();
 	AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
+	InitializeAttributes();
 	SetHealth(GetMaxHealth());
 	SetMana(GetMaxMana());
 }
