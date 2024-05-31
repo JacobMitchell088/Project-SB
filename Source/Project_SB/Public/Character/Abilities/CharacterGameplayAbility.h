@@ -8,6 +8,7 @@
 #include "CharacterGameplayAbility.generated.h"
 
 
+
 /**
  * 
  */
@@ -19,11 +20,13 @@ class PROJECT_SB_API UCharacterGameplayAbility : public UGameplayAbility
 public:
 	UCharacterGameplayAbility();
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Ability")
-	DemoAbilityID AbilityInputID = DemoAbilityID::None;
+
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Ability")
-	DemoAbilityID AbilityID = DemoAbilityID::None;
+	SBAbilityID AbilityInputID = SBAbilityID::None;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Ability")
+	SBAbilityID AbilityID = SBAbilityID::None;
 
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Ability")

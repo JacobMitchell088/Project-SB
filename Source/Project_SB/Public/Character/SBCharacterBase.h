@@ -31,10 +31,10 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "SB|Character")
 	FCharacterDiedDelegate OnCharacterDied;
 
-	UFUNCTION(BlueprintAssignable, Category = "SB|Character")
+	UFUNCTION(BlueprintCallable, Category = "SB|Character")
 	virtual bool IsAlive() const;
 
-	UFUNCTION(BlueprintAssignable, Category = "SB|Character")
+	UFUNCTION(BlueprintCallable, Category = "SB|Character")
 	virtual int32 GetAbilityLevel(SBAbilityID AbilityID) const;
 
 	virtual void RemoveCharacterAbilities();

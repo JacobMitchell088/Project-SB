@@ -22,6 +22,11 @@ ASBCharacterBase::ASBCharacterBase(const class FObjectInitializer& ObjectInitial
 	EffectRemoveOnDeathTag = FGameplayTag::RequestGameplayTag(FName("State.RemoveOnDeath"));
 }
 
+UAbilitySystemComponent* ASBCharacterBase::GetAbilitySystemComponent() const {
+
+	return AbilitySystemComponent.Get();
+}
+
 bool ASBCharacterBase::IsAlive() const {
 
 	return GetHealth() > 0.0f;

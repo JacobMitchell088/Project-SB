@@ -12,4 +12,6 @@ class PROJECT_SB_API MyClass
 public:
 	MyClass();
 	~MyClass();
+
 };
+
