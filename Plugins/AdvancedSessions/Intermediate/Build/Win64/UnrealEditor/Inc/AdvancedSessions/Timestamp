@@ -1,23 +1,23 @@
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedGameSession.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedExternalUILibrary.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsGameInstance.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsLibrary.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedIdentityLibrary.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedVoiceLibrary.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsInterface.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AutoLoginUserCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CancelFindSessionsCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CreateSessionCallbackProxyAdvanced.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\BlueprintDataDefinitions.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedSessionsLibrary.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetUserPrivilegeCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindSessionsCallbackProxyAdvanced.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\SendFriendInviteCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindFriendSessionCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LogoutUserCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\StartSessionCallbackProxyAdvanced.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\EndSessionCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetFriendsCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\UpdateSessionCallbackProxyAdvanced.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LoginUserCallbackProxy.h
-D:\ProjectParkour\Project-SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetRecentPlayersCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedExternalUILibrary.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsGameInstance.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedIdentityLibrary.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedVoiceLibrary.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedGameSession.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AutoLoginUserCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedSessionsLibrary.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindSessionsCallbackProxyAdvanced.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\BlueprintDataDefinitions.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetRecentPlayersCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CreateSessionCallbackProxyAdvanced.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindFriendSessionCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetFriendsCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetUserPrivilegeCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CancelFindSessionsCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsLibrary.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LogoutUserCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\SendFriendInviteCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\EndSessionCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LoginUserCallbackProxy.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\StartSessionCallbackProxyAdvanced.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\UpdateSessionCallbackProxyAdvanced.h
+C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsInterface.h
