@@ -10,8 +10,12 @@
 /**
  * 
  */
+
+// Trying to forward declare playercontroller
+class ASBPlayerController;
+
 UCLASS()
-class PROJECT_SB_API ASBPlayerCharacter : public ASBCharacterBase
+class PROJECT_SB_API ASBPlayerCharacter : public ASBCharacterBase 
 {
 	GENERATED_BODY()
 	
@@ -33,13 +37,14 @@ public:
 	FVector GetStartingCameraBoomLocation();
 
 protected:
+	ASBPlayerController* OurPlayerController;
+
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SB|Camera")
 	float BaseTurnRate = 45.0f;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SB|Camera")
 	float BaseLookUpRate = 45.0f;
-
 
 	UPROPERTY(BlueprintReadOnly, Category = "SB|Camera")
 	float StartingCameraBoomArmLength;
@@ -58,6 +63,7 @@ protected:
 	FGameplayTag DeadTag;
 
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 	void LookUp(float Value);
 	void LookUpRate(float Value);
@@ -65,6 +71,8 @@ protected:
 	void TurnRate(float Value);
 	void MoveForward(float Value);
 	void MoveRight(float Value);
+
+	void RotateToFaceCursor();
 
 
 	virtual void OnRep_PlayerState() override;

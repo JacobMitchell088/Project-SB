@@ -11,17 +11,18 @@
 #include "Player/SBPlayerController.h"
 #include "Character/Abilities/CharacterAbilitySystemComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 ASBPlayerCharacter::ASBPlayerCharacter(const class FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(FName("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->bUsePawnControlRotation = true;
-	CameraBoom->SetRelativeLocation(FVector(0, 0, 70));
+	CameraBoom->SetRelativeLocation(FVector(0, 0, 200));
 
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(FName("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom);
-	FollowCamera->FieldOfView = 80.0f;
+	FollowCamera->FieldOfView = 90.0f;
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 
@@ -30,6 +31,7 @@ ASBPlayerCharacter::ASBPlayerCharacter(const class FObjectInitializer& ObjectIni
 	GetMesh()->SetCollisionProfileName(FName("NoCollision"));
 
 	AIControllerClass = APlayerController::StaticClass();
+	OurPlayerController = nullptr;
 
 	DeadTag = FGameplayTag::RequestGameplayTag(FName("State.Dead"));
 }
@@ -89,48 +91,76 @@ void ASBPlayerCharacter::BeginPlay()
 
 	StartingCameraBoomArmLength = CameraBoom->TargetArmLength;
 	StartingCameraBoomArmLocation = CameraBoom->GetRelativeLocation();
+
+	OurPlayerController = Cast<ASBPlayerController>(GetController());
+}
+
+void ASBPlayerCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	RotateToFaceCursor();
 }
 
 void ASBPlayerCharacter::LookUp(float Value)
 {
-	if (IsAlive()) {
-		AddControllerPitchInput(Value);
-	}
+	//if (IsAlive()) {
+	//	AddControllerPitchInput(Value);
+	//}
 }
 
 void ASBPlayerCharacter::LookUpRate(float Value)
 {
-	if (IsAlive()) {
-		AddControllerPitchInput(Value * BaseLookUpRate * GetWorld()->DeltaTimeSeconds);
-	}
+	//if (IsAlive()) {
+	//	AddControllerPitchInput(Value * BaseLookUpRate * GetWorld()->DeltaTimeSeconds);
+	//}
 }
 
 void ASBPlayerCharacter::Turn(float Value)
 {
-	if (IsAlive()) {
-		AddControllerYawInput(Value);
-	}
+	//if (IsAlive()) {
+	//	AddControllerYawInput(Value);
+	//}
 }
 
 void ASBPlayerCharacter::TurnRate(float Value)
 {
-	if (IsAlive()) {
-		AddControllerYawInput(Value * BaseTurnRate * GetWorld()->DeltaTimeSeconds);
-	}
+	//if (IsAlive()) {
+	//	AddControllerYawInput(Value * BaseTurnRate * GetWorld()->DeltaTimeSeconds);
+	//}
 }
 
 void ASBPlayerCharacter::MoveForward(float Value)
 {
 	if (IsAlive()) {
-		AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);
+		// AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0, GetControlRotation().Yaw, 0)), Value); // For Third Person idk what we're doing yet so I'll leave it
+		AddMovementInput(FVector::ForwardVector, Value);
 	}
 }
 
 void ASBPlayerCharacter::MoveRight(float Value)
 {
 	if (IsAlive()) {
-		AddMovementInput(UKismetMathLibrary::GetRightVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);
+		// AddMovementInput(UKismetMathLibrary::GetRightVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);  // See prev comment
+		AddMovementInput(FVector::RightVector, Value);
 	}
+}
+
+void ASBPlayerCharacter::RotateToFaceCursor()
+{
+	if (!IsAlive() || !OurPlayerController) {
+		return; 
+	}
+
+	FVector MouseLocation, MouseDirection;
+
+	if (OurPlayerController->DeprojectMousePositionToWorld(MouseLocation, MouseDirection)) {
+		FVector CharacterLocation = GetActorLocation();
+		FVector WorldMousePosition = MouseLocation + MouseDirection * (FVector::DotProduct(CharacterLocation - MouseLocation, FVector::UpVector) / FVector::DotProduct(MouseDirection, FVector::UpVector));
+
+		FRotator NewRotation = UKismetMathLibrary::FindLookAtRotation(CharacterLocation, WorldMousePosition);
+		SetActorRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); // Possibly try PlayerController->SetControlRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); To obtain a smoother turn rather than instant
+	}
+
 }
 
 void ASBPlayerCharacter::OnRep_PlayerState() 

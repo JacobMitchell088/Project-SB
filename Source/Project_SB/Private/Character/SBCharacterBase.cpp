@@ -134,7 +134,7 @@ void ASBCharacterBase::BeginPlay()
 }
 
 void ASBCharacterBase::AddCharacterAbilities() {
-	if (GetLocalRole() != ROLE_Authority || !AbilitySystemComponent.IsValid() || AbilitySystemComponent->CharacterAbilitiesGiven) {
+	if (GetLocalRole() != ROLE_Authority || !AbilitySystemComponent.IsValid() || AbilitySystemComponent->CharacterAbilitiesGiven) { // Previously: !AbilitySystemComponent->CharacterAbilitiesGiven monitor for bugs
 		return;
 	}
 
@@ -169,7 +169,7 @@ void ASBCharacterBase::InitializeAttributes() {
 
 void ASBCharacterBase::AddStartupEffects() {
 
-	if (GetLocalRole() != ROLE_Authority || !AbilitySystemComponent.IsValid() || AbilitySystemComponent->CharacterAbilitiesGiven) {
+	if (GetLocalRole() != ROLE_Authority || !AbilitySystemComponent.IsValid() || AbilitySystemComponent->CharacterAbilitiesGiven) { // Previously: !AbilitySystemComponent->CharacterAbilitiesGiven monitor for bugs
 		return;
 	}
 

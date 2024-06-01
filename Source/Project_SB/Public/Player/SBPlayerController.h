@@ -16,5 +16,6 @@ class PROJECT_SB_API ASBPlayerController : public APlayerController
 
 protected:
 	virtual void OnPossess(APawn* InPawn) override;
+	virtual void BeginPlay() override;
 	
 };

@@ -16,5 +16,11 @@ void ASBPlayerController::OnPossess(APawn* InPawn)
 	}
 }
 
+void ASBPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	SetShowMouseCursor(true);
+}
+
 
 // TODO -- Add hud stuff
