@@ -6,8 +6,8 @@
 /NAME:"UnrealEditor-AdvancedSteamSessions.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Intermediate\Build\Win64\Project_SBEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.cpp.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Default.rc2.res"
-/OUT:"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Intermediate\Build\Win64\Project_SBEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.cpp.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Default.rc2.res"
+/OUT:"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib"
