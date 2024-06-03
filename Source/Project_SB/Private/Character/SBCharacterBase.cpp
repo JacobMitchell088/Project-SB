@@ -57,6 +57,13 @@ void ASBCharacterBase::RemoveCharacterAbilities() {
 	bAbilitiesInitialized = false;
 }
 
+void ASBCharacterBase::HandleHealthChanged(float DeltaValue, const FGameplayTagContainer& EventTags)
+{
+	if (bAbilitiesInitialized) {
+		OnHealthChanged(DeltaValue, EventTags);
+	}
+}
+
 float ASBCharacterBase::GetCharacterLevel() const {
 
 	if (AttributeSetBase.IsValid()) {
