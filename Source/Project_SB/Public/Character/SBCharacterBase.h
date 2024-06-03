@@ -81,6 +81,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "SB|Abilities")
 	TArray<TSubclassOf<class UCharacterGameplayAbility>> CharacterAbilities;
 
+	UPROPERTY()
+	uint8 bAbilitiesInitialized : 1;
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "SB|Abilities")
 	TSubclassOf<class UGameplayEffect> DefaultAttributes;
 

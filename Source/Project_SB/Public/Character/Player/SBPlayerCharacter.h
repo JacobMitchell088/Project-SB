@@ -58,6 +58,12 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "SB|Camera")
 	class UCameraComponent* FollowCamera;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "SB|Events")
+	void OnHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
+	
+	virtual void HandleHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
+
+	friend UCharacterAttributeSetBase;
 
 	bool ASCInputBound = false;
 

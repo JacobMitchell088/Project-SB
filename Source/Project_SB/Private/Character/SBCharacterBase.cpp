@@ -54,6 +54,7 @@ void ASBCharacterBase::RemoveCharacterAbilities() {
 	}
 
 	AbilitySystemComponent->CharacterAbilitiesGiven = false;
+	bAbilitiesInitialized = false;
 }
 
 float ASBCharacterBase::GetCharacterLevel() const {
@@ -156,6 +157,7 @@ void ASBCharacterBase::AddCharacterAbilities() {
 	}
 
 	AbilitySystemComponent->CharacterAbilitiesGiven = true;
+	bAbilitiesInitialized = true;
 
 }
 
