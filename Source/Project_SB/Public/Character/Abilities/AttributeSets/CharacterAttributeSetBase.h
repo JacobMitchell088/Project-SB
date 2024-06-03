@@ -15,45 +15,45 @@
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 /**
- * 
+ *
  */
 UCLASS()
 class PROJECT_SB_API UCharacterAttributeSetBase : public UAttributeSet
 {
 	GENERATED_BODY()
-	
+
 
 public:
 	UPROPERTY(BlueprintReadOnly, Category = "Level", ReplicatedUsing = OnRep_Level)
 	FGameplayAttributeData Level;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, Level)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_Health)
+		UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_Health)
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, Health)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_MaxHealth)
+		UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_MaxHealth)
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, MaxHealth)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Mana", ReplicatedUsing = OnRep_Mana)
+		UPROPERTY(BlueprintReadOnly, Category = "Mana", ReplicatedUsing = OnRep_Mana)
 	FGameplayAttributeData Mana;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, Mana)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Mana", ReplicatedUsing = OnRep_MaxMana)
+		UPROPERTY(BlueprintReadOnly, Category = "Mana", ReplicatedUsing = OnRep_MaxMana)
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, MaxMana)
 
 
-	// Damage is a meta attribute used by the DamageExecution to calculate final damage
-	// Temporary value that only exists on the server. Not replicated.
-	UPROPERTY(BlueprintReadOnly, Category = "Damage")
+		// Damage is a meta attribute used by the DamageExecution to calculate final damage
+		// Temporary value that only exists on the server. Not replicated.
+		UPROPERTY(BlueprintReadOnly, Category = "Damage")
 	FGameplayAttributeData Damage;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, Damage)
 
 
-	// For Replication
-	UFUNCTION()
+		// For Replication
+		UFUNCTION()
 	virtual void OnRep_Level(const FGameplayAttributeData& OldLevel);
 	UFUNCTION()
 	virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
@@ -65,4 +65,9 @@ public:
 	virtual void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana);
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+
+	void AdjustAttributeForMaxChange(const FGameplayAttributeData& AffectedAttribute, const FGameplayAttributeData& MaxAttribute, float NewMaxValue, const FGameplayAttribute& AffectedAttributeProperty) const;
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override; // overrides so that we can call events when we change our attributes to check for death, etc
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 };
