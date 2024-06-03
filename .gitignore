@@ -49,3 +49,4 @@ Session.vim
 
 # Visual Studio
 .vs
+/Plugins/AdvancedSessions/Intermediate
