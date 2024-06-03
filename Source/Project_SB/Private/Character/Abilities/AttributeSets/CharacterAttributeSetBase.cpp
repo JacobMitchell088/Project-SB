@@ -71,7 +71,7 @@ void UCharacterAttributeSetBase::PostGameplayEffectExecute(const FGameplayEffect
 
 	float DeltaValue{ 0.f };
 
-	if (Data.EvaluatedData.ModifierOp = EGameplayModOp::Type::Additive) {
+	if (Data.EvaluatedData.ModifierOp == EGameplayModOp::Type::Additive) {
 		DeltaValue = Data.EvaluatedData.Magnitude;
 	}
 

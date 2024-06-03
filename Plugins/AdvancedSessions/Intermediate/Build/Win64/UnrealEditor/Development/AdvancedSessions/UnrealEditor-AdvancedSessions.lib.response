@@ -6,10 +6,10 @@
 /NAME:"UnrealEditor-AdvancedSessions.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Intermediate\Build\Win64\Project_SBEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.cpp.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.gen.1_of_3.cpp.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.gen.2_of_3.cpp.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.gen.3_of_3.cpp.obj"
-"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Default.rc2.res"
-/OUT:"C:\Users\jacob\Documents\Unreal Projects\Project_SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.lib"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Intermediate\Build\Win64\Project_SBEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.cpp.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.gen.1_of_3.cpp.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.gen.2_of_3.cpp.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.gen.3_of_3.cpp.obj"
+"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\Default.rc2.res"
+/OUT:"C:\Users\ZacharyWedel\Documents\GitHub\Project-SB\Plugins\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.lib"

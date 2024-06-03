@@ -21,7 +21,11 @@ public:
 	bool CharacterAbilitiesGiven = false;
 	bool StartupEffectsApplied = false;
 
+	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FReceivedDamageDelegate ReceivedDamage;
 
 	virtual void ReceiveDamage(UCharacterAbilitySystemComponent* SourceASC, float UnmitigatedDamage, float MitigatedDamage);
+
+	// Wedel Made This
+
 };
