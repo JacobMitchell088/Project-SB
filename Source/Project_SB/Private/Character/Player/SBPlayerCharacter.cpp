@@ -93,7 +93,7 @@ FVector ASBPlayerCharacter::GetStartingCameraBoomLocation()
 
 void ASBPlayerCharacter::HandleHealthChanged(float DeltaValue, const FGameplayTagContainer& EventTags)
 {
-	if (IsAlive() && bAbilitiesInitialized) { // Are abilities initialized?
+	if (bAbilitiesInitialized) { 
 		OnHealthChanged(DeltaValue, EventTags);
 	}
 }
