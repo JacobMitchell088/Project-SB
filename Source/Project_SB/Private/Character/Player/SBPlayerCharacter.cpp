@@ -91,6 +91,13 @@ FVector ASBPlayerCharacter::GetStartingCameraBoomLocation()
 	return StartingCameraBoomArmLocation;
 }
 
+void ASBPlayerCharacter::HandleHealthChanged(float DeltaValue, const FGameplayTagContainer& EventTags)
+{
+	if (IsAlive() && bAbilitiesInitialized) { // Are abilities initialized?
+		OnHealthChanged(DeltaValue, EventTags);
+	}
+}
+
 void ASBPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();

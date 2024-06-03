@@ -39,6 +39,7 @@ public:
 
 	virtual void RemoveCharacterAbilities();
 
+	UFUNCTION(BlueprintCallable, Category = "SB|Character")
 	virtual void Die();
 
 	UFUNCTION(BlueprintCallable, Category = "SB|Character")
@@ -80,11 +81,17 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "SB|Abilities")
 	TArray<TSubclassOf<class UCharacterGameplayAbility>> CharacterAbilities;
 
+	UPROPERTY()
+	uint8 bAbilitiesInitialized : 1;
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "SB|Abilities")
 	TSubclassOf<class UGameplayEffect> DefaultAttributes;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "SB|Abilities") // Basically for effects we can used to indicate the spawning of a player
 	TArray<TSubclassOf<class UGameplayEffect>> StartupEffects;
+
+	UFUNCTION(BlueprintCallable, Category = "SB|Character")
+	void EnableRagdoll();
 
 	virtual void AddCharacterAbilities();
 
