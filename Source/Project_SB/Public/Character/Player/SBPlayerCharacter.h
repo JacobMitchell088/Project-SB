@@ -58,6 +58,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "SB|Camera")
 	class UCameraComponent* FollowCamera;
 
+
 	bool ASCInputBound = false;
 
 	FGameplayTag DeadTag;
@@ -73,6 +74,20 @@ protected:
 	void MoveRight(float Value);
 
 	void RotateToFaceCursor();
+
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|Camera");
+	float DeadzoneRadius;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|Camera");
+	float CameraMovementSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|Camera");
+	float MaxCameraDistance;
+	FVector LastCameraLocation;
+
+	void UpdateCameraPosition(float DeltaTime);
 
 
 	virtual void OnRep_PlayerState() override;

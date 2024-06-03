@@ -34,6 +34,12 @@ ASBPlayerCharacter::ASBPlayerCharacter(const class FObjectInitializer& ObjectIni
 	OurPlayerController = nullptr;
 
 	DeadTag = FGameplayTag::RequestGameplayTag(FName("State.Dead"));
+
+
+	DeadzoneRadius = 200.0f;
+	CameraMovementSpeed = 300.0f;
+	MaxCameraDistance = 1000.0f;
+	LastCameraLocation = CameraBoom->GetComponentLocation();
 }
 
 void ASBPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -99,6 +105,7 @@ void ASBPlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	RotateToFaceCursor();
+	// UpdateCameraPosition(DeltaTime);
 }
 
 void ASBPlayerCharacter::LookUp(float Value)
@@ -131,7 +138,7 @@ void ASBPlayerCharacter::TurnRate(float Value)
 
 void ASBPlayerCharacter::MoveForward(float Value)
 {
-	if (IsAlive()) {
+	if (IsAlive() && AbilitySystemComponent->GetGameplayTagCount(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun"))) == 0) {
 		// AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0, GetControlRotation().Yaw, 0)), Value); // For Third Person idk what we're doing yet so I'll leave it
 		AddMovementInput(FVector::ForwardVector, Value);
 	}
@@ -139,7 +146,7 @@ void ASBPlayerCharacter::MoveForward(float Value)
 
 void ASBPlayerCharacter::MoveRight(float Value)
 {
-	if (IsAlive()) {
+	if (IsAlive() && AbilitySystemComponent->GetGameplayTagCount(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun"))) == 0) {
 		// AddMovementInput(UKismetMathLibrary::GetRightVector(FRotator(0, GetControlRotation().Yaw, 0)), Value);  // See prev comment
 		AddMovementInput(FVector::RightVector, Value);
 	}
@@ -147,7 +154,7 @@ void ASBPlayerCharacter::MoveRight(float Value)
 
 void ASBPlayerCharacter::RotateToFaceCursor()
 {
-	if (!IsAlive() || !OurPlayerController) {
+	if (!IsAlive() || !OurPlayerController || AbilitySystemComponent->GetGameplayTagCount(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun"))) != 0) {
 		return; 
 	}
 
@@ -161,6 +168,55 @@ void ASBPlayerCharacter::RotateToFaceCursor()
 		SetActorRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); // Possibly try PlayerController->SetControlRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); To obtain a smoother turn rather than instant
 	}
 
+}
+
+void ASBPlayerCharacter::UpdateCameraPosition(float DeltaTime) // Come back to it not working
+{
+	if (!OurPlayerController) {
+		return;
+	}
+
+	// Get the mouse position
+	float MouseX, MouseY;
+	OurPlayerController->GetMousePosition(MouseX, MouseY);
+
+	// Get the character's screen position
+	FVector2D ScreenPosition;
+	OurPlayerController->ProjectWorldLocationToScreen(GetActorLocation(), ScreenPosition);
+
+	// Calculate the offset from the character to the mouse position
+	FVector2D Offset = FVector2D(MouseX, MouseY) - ScreenPosition;
+
+	// Current camera location
+	FVector CurrentLocation = CameraBoom->GetComponentLocation();
+
+	if (Offset.Size() > DeadzoneRadius) { // Outside deadzone
+		// Normalize the offset to use as a direction
+		FVector Direction = GetActorForwardVector(); // . getsafenormal()
+
+		// Scale the direction by the offset size and a speed factor
+		FVector NewLocation = CurrentLocation + Direction * Offset.Size() * CameraMovementSpeed * DeltaTime;
+
+		// Calculate the distance from the character to the new camera location
+		float DistanceFromCharacter = FVector::Dist(GetActorLocation(), NewLocation);
+
+		// Clamp the camera distance to the maximum allowed distance
+		if (DistanceFromCharacter > MaxCameraDistance) {
+			NewLocation = GetActorLocation() + (NewLocation - GetActorLocation()).GetSafeNormal() * MaxCameraDistance;
+			NewLocation.Z = CurrentLocation.Z;
+		}
+
+		// Set the new camera location
+		// Vinterp(newlocation, oldlcoation)
+		CameraBoom->SetWorldLocation(NewLocation);
+	}
+	else { // Inside deadzone, smoothly recenter
+		FVector TargetLocation = GetActorLocation();
+		TargetLocation.Z = CurrentLocation.Z; // Maintain the camera height
+
+		FVector NewLocation = FMath::VInterpTo(CurrentLocation, TargetLocation, DeltaTime, CameraMovementSpeed);
+		CameraBoom->SetWorldLocation(NewLocation);
+	}
 }
 
 void ASBPlayerCharacter::OnRep_PlayerState() 
