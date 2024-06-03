@@ -102,6 +102,7 @@ void ASBCharacterBase::Die() {
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetCharacterMovement()->GravityScale = 0;
 	GetCharacterMovement()->Velocity = FVector(0);
+	EnableRagdoll(); // Remove later for death montage
 
 	OnCharacterDied.Broadcast(this);
 
@@ -131,6 +132,18 @@ void ASBCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void ASBCharacterBase::EnableRagdoll()
+{
+	GetCharacterMovement()->DisableMovement();
+
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->WakeAllRigidBodies();
+
+	GetMesh()->SetCollisionProfileName(TEXT("Ragdoll"));
 }
 
 void ASBCharacterBase::AddCharacterAbilities() {
