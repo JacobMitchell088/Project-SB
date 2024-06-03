@@ -54,6 +54,7 @@ void ASBCharacterBase::RemoveCharacterAbilities() {
 	}
 
 	AbilitySystemComponent->CharacterAbilitiesGiven = false;
+	bAbilitiesInitialized = false;
 }
 
 float ASBCharacterBase::GetCharacterLevel() const {
@@ -102,6 +103,7 @@ void ASBCharacterBase::Die() {
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetCharacterMovement()->GravityScale = 0;
 	GetCharacterMovement()->Velocity = FVector(0);
+	EnableRagdoll(); // Remove later for death montage
 
 	OnCharacterDied.Broadcast(this);
 
@@ -133,6 +135,18 @@ void ASBCharacterBase::BeginPlay()
 	
 }
 
+void ASBCharacterBase::EnableRagdoll()
+{
+	GetCharacterMovement()->DisableMovement();
+
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->WakeAllRigidBodies();
+
+	GetMesh()->SetCollisionProfileName(TEXT("Ragdoll"));
+}
+
 void ASBCharacterBase::AddCharacterAbilities() {
 	if (GetLocalRole() != ROLE_Authority || !AbilitySystemComponent.IsValid() || AbilitySystemComponent->CharacterAbilitiesGiven) { // Previously: !AbilitySystemComponent->CharacterAbilitiesGiven monitor for bugs
 		return;
@@ -143,6 +157,7 @@ void ASBCharacterBase::AddCharacterAbilities() {
 	}
 
 	AbilitySystemComponent->CharacterAbilitiesGiven = true;
+	bAbilitiesInitialized = true;
 
 }
 
