@@ -32,6 +32,6 @@ protected:
 	//UPROPERTY(EditAnywhere)
 	//UProjectileMovementComponent* ProjectileMovementComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	USphereComponent* SphereCollision;
 };
