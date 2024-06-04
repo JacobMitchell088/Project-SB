@@ -53,8 +53,9 @@ void ASB_AICharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
+
+	// Moved to AI controller possesed
 	// ASB_AICharacter* AIChar = Cast<ASB_AICharacter>(NewController->GetPawn());
-	
 	//if (AIChar) {
 	//	InitializeAttributes();
 	//}
@@ -80,20 +81,20 @@ UAbilitySystemComponent* ASB_AICharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
-void ASB_AICharacter::InitializeAttributes()
+void ASB_AICharacter::InitializeAttributes() // Morphed into initialize everything for our AI
 {
 	UE_LOG(LogTemp, Warning, TEXT("Attemping to Initialize Attributes For AI"));
 
 
 
 	ASBCharacterBase::AbilitySystemComponent = Cast<UCharacterAbilitySystemComponent>(GetAbilitySystemComponent()); // Prob don't need to cast if it's going to be same type
-	//AttributeSetBase = Cast<UCharacterAttributeSetBase>(AI_AttributeSetBase);
+	// AttributeSetBase = Cast<UAttributeSet>(GetAttributeSetBase()); Our attribute of this character is not inherited or of type UCharacterAttributeSet, which is what this wants. Luckily we already have our own getters/setters
 	if (ASBCharacterBase::AbilitySystemComponent.IsValid()) {
-		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ASC is now valid."), *FString(__FUNCTION__), *GetName());
+		UE_LOG(LogTemp, Warning, TEXT("%s() Base Character weak pointer ASC is now VALID."), *FString(__FUNCTION__), *GetName());
 	}
-	if (AttributeSetBase.IsValid()) {
-		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ATSB is now valid."), *FString(__FUNCTION__), *GetName());
-	}
+	//if (AttributeSetBase.IsValid()) {
+	//	UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ATSB is now valid."), *FString(__FUNCTION__), *GetName());
+	//}
 
 
 
@@ -101,13 +102,14 @@ void ASB_AICharacter::InitializeAttributes()
 	ASB_AICharacter::AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
 	ASBCharacterBase::AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
 
-
+	
 
 	ASB_AICharacter::AbilitySystemComponent->InitAbilityActorInfo(GetController(), this); // maybe comment out
 	Super::InitializeAttributes();
 	AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth()); 
 
-
+	AddStartupEffects();
+	AddCharacterAbilities();
 }
 
 UAI_AttributeSetBase* ASB_AICharacter::GetAttributeSetBase() const

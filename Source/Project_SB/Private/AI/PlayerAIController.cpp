@@ -17,6 +17,8 @@ void APlayerAIController::OnPossess(APawn* InPawn)
 
 	if (ASB_AICharacter* AIPawn = Cast<ASB_AICharacter>(InPawn)) {
 		AIPawn->GetAbilitySystemComponent()->InitAbilityActorInfo(this, InPawn);
+		
+		//AIPawn->AddStartUpEffects();
 	}
 	else {
 		UE_LOG(LogTemp, Error, TEXT("OnPossess In PlayerAIController Failed to InitializeAbilityActorInfo - Kimic"), *FString(__FUNCTION__), *GetName());

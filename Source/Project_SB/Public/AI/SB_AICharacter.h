@@ -75,6 +75,7 @@ protected:
 
 	UPROPERTY()
 	class UAI_AttributeSetBase* AI_AttributeSetBase;
+
 	
 	FGameplayTag DeadTag;
 
