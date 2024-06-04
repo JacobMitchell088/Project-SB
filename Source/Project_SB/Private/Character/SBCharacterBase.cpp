@@ -105,12 +105,14 @@ float ASBCharacterBase::GetMaxMana() const {
 }
 
 void ASBCharacterBase::Die() {
+	UE_LOG(LogTemp, Warning, TEXT("%s() DIE()"), *FString(__FUNCTION__), *GetName());
+
 	RemoveCharacterAbilities();
 	
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetCharacterMovement()->GravityScale = 0;
-	GetCharacterMovement()->Velocity = FVector(0);
-	EnableRagdoll(); // Remove later for death montage
+	GetCharacterMovement()->Velocity = FVector(0); // Can re-enable/disable if you dont want corpses flying everywhere
+	// EnableRagdoll(); // Remove later for death montage
 
 	OnCharacterDied.Broadcast(this);
 

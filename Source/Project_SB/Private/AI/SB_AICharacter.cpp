@@ -73,7 +73,7 @@ void ASB_AICharacter::Tick(float DeltaTime)
 
 void ASB_AICharacter::Die()
 {
-    Destroy();
+	Super::Die();
 }
 
 UAbilitySystemComponent* ASB_AICharacter::GetAbilitySystemComponent() const
