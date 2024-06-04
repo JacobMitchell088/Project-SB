@@ -8,6 +8,7 @@
 #include "GameplayEffectTypes.h"
 #include "AIModule/Classes/BehaviorTree/BehaviorTree.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Character/Abilities/CharacterAbilitySystemComponent.h"
 #include "SB_AICharacter.generated.h"
 
 
@@ -70,7 +71,7 @@ protected:
 
 protected:
 	UPROPERTY()
-	class UAbilitySystemComponent* AbilitySystemComponent;
+	class UCharacterAbilitySystemComponent* AbilitySystemComponent;
 
 	UPROPERTY()
 	class UAI_AttributeSetBase* AI_AttributeSetBase;

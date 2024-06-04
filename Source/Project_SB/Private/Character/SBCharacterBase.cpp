@@ -171,6 +171,7 @@ void ASBCharacterBase::AddCharacterAbilities() {
 void ASBCharacterBase::InitializeAttributes() {
 
 	if (!AbilitySystemComponent.IsValid()) {
+		UE_LOG(LogTemp, Error, TEXT("%s() Invalid ASC In Initialize Attributes."), *FString(__FUNCTION__), *GetName());
 		return;
 	}
 

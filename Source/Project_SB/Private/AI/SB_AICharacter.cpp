@@ -6,7 +6,7 @@
 ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	AIControllerClass = APlayerController::StaticClass();
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent = CreateDefaultSubobject<UCharacterAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal); 
@@ -26,11 +26,16 @@ void ASB_AICharacter::BeginPlay()
 	Super::BeginPlay();
 
 	if (AbilitySystemComponent) {
+		UE_LOG(LogTemp, Warning, TEXT("%s() ASC Was VALID at begin play. Went on and bound delegate handles."), *FString(__FUNCTION__), *GetName());
 		AIHealthChangedDelegateHandle = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AI_AttributeSetBase->GetAI_HealthAttribute()).AddUObject(this, &ASB_AICharacter::AIHealthChanged);
 		AIMaxHealthChangedDelegateHandle = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AI_AttributeSetBase->GetAI_HealthAttribute()).AddUObject(this, &ASB_AICharacter::AIMaxHealthChanged);
 		
 
 		AbilitySystemComponent->RegisterGameplayTagEvent(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun")), EGameplayTagEventType::NewOrRemoved).AddUObject(this, &ASB_AICharacter::AIStunTagChanged);
+		InitializeAttributes();
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT("%s() ASC Was INVALID at beginplay. Delegatehandles are now invalid."), *FString(__FUNCTION__), *GetName());
 	}
 }
 
@@ -48,14 +53,15 @@ void ASB_AICharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	ASB_AICharacter* AIChar = Cast<ASB_AICharacter>(NewController->GetPawn());
-
-	if (AIChar) {
-		InitializeAttributes();
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("SB_AICharacter 'PossesedBy' Function failed to initialize attributes - Kimic"));
-	}
+	// ASB_AICharacter* AIChar = Cast<ASB_AICharacter>(NewController->GetPawn());
+	
+	//if (AIChar) {
+	//	InitializeAttributes();
+	//}
+	//else {
+	//	UE_LOG(LogTemp, Warning, TEXT("SB_AICharacter 'PossesedBy' Function failed to initialize attributes - Kimic"));
+	//}
+	InitializeAttributes();
 }
 
 
@@ -76,8 +82,30 @@ UAbilitySystemComponent* ASB_AICharacter::GetAbilitySystemComponent() const
 
 void ASB_AICharacter::InitializeAttributes()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Attemping to Initialize Attributes For AI"));
+
+
+	
+	
+	ASBCharacterBase::AbilitySystemComponent = Cast<UCharacterAbilitySystemComponent>(GetAbilitySystemComponent()); // Prob don't need to cast if it's going to be same type
+	AttributeSetBase = Cast<UCharacterAttributeSetBase>(AI_AttributeSetBase);
+	if (ASBCharacterBase::AbilitySystemComponent.IsValid()) {
+		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ASC is now valid."), *FString(__FUNCTION__), *GetName());
+	}
+	if (AttributeSetBase.IsValid()) {
+		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ATSB is now valid."), *FString(__FUNCTION__), *GetName());
+	}
+
+	AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
+	ASBCharacterBase::AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
+
+
+
+	AbilitySystemComponent->InitAbilityActorInfo(GetController(), this); // maybe comment out
 	Super::InitializeAttributes();
 	AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth()); 
+
+
 }
 
 UAI_AttributeSetBase* ASB_AICharacter::GetAttributeSetBase() const
