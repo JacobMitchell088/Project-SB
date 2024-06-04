@@ -15,11 +15,12 @@ ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : 
 
 	DeadTag = FGameplayTag::RequestGameplayTag(FName("State.Dead"));
 
-	//AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
-	//AI_AttributeSetBase = CreateDefaultSubobject<UAI_AttributeSetBase>(TEXT("AI_AttributeSetBase"));
-
 	bAlwaysRelevant = true;
 	PrimaryActorTick.bCanEverTick = true;
+
+	//InitializeAttributes();
+	//AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth());
+
 }
 
 void ASB_AICharacter::BeginPlay()
@@ -38,6 +39,11 @@ void ASB_AICharacter::BeginPlay()
 void ASB_AICharacter::ApplyDamageAI(float DamageAmount)
 {
 
+}
+
+UBehaviorTree* ASB_AICharacter::GetBehaviorTree() const
+{
+	return Tree;
 }
 
 

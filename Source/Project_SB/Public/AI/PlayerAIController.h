@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "SB_AICharacter.h"
 #include "PlayerAIController.generated.h"
 
 /**
@@ -22,4 +23,5 @@ public:
 protected:
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void BeginPlay() override;
+
 };

@@ -10,9 +10,25 @@ APlayerAIController::APlayerAIController()
 	
 }
 
+
 void APlayerAIController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+
+	if (ASB_AICharacter* AIPawn = Cast<ASB_AICharacter>(InPawn)) {
+		AIPawn->GetAbilitySystemComponent()->InitAbilityActorInfo(this, InPawn);
+	}
+
+	//if (ASB_AICharacter* const SB_AICharacter = Cast<ASB_AICharacter>(InPawn)) { // Throw in for behavior tree activation when an AI posses this pawn
+
+	//	if (UBehaviorTree* const Tree = SB_AICharacter->GetBehaviorTree()) {
+	//		UBlackboardComponent* b;
+	//		UseBlackboard(Tree->BlackboardAsset, b);
+	//		Blackboard = b;
+	//		RunBehaviorTree(Tree);
+	//	}
+
+	//}
 }
 
 void APlayerAIController::BeginPlay()

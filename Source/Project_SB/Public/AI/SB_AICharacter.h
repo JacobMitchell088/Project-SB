@@ -6,6 +6,8 @@
 #include "Character/SBCharacterBase.h"
 #include "AttributeSets/AI_AttributeSetBase.h"
 #include "GameplayEffectTypes.h"
+#include "AIModule/Classes/BehaviorTree/BehaviorTree.h"
+#include "UObject/ConstructorHelpers.h"
 #include "SB_AICharacter.generated.h"
 
 
@@ -24,6 +26,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "SB|AI")
 	void ApplyDamageAI(float DamageAmount);
 
+	UBehaviorTree* GetBehaviorTree() const;
+
+
+	class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 protected:
 	virtual void Tick(float DeltaTime) override;
@@ -32,13 +38,13 @@ protected:
 
 	friend UAI_AttributeSetBase; // Allow Attributes to use HandleHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|AI", meta = (AllowPrivateAccess = "true"))
+	UBehaviorTree* Tree;
 
 
 
 	// PS Transferred For Net stability
 
-	class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	class UAI_AttributeSetBase* GetAttributeSetBase() const;
 
