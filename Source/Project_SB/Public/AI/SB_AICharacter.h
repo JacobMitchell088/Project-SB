@@ -30,7 +30,7 @@ protected:
 
 	virtual void Die() override;
 
-	//friend UAI_AttributeSetBase;
+	friend UAI_AttributeSetBase; // Allow Attributes to use HandleHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
 
 
 

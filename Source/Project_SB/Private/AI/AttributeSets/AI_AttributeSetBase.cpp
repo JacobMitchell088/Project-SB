@@ -2,6 +2,8 @@
 
 
 #include "AI/AttributeSets/AI_AttributeSetBase.h"
+#include "GameplayEffectExtension.h"
+#include "AI/SB_AICharacter.h"
 #include "Net/UnrealNetwork.h"
 
 void UAI_AttributeSetBase::OnRep_Health(const FGameplayAttributeData& OldHealth)
@@ -45,35 +47,35 @@ void UAI_AttributeSetBase::PreAttributeChange(const FGameplayAttribute& Attribut
 
 void UAI_AttributeSetBase::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
-	//Super::PostGameplayEffectExecute(Data);
+	Super::PostGameplayEffectExecute(Data);
 
-	//FGameplayEffectContextHandle Context = Data.EffectSpec.GetContext();
-	//UAbilitySystemComponent* Source = Context.GetOriginalInstigatorAbilitySystemComponent();
+	FGameplayEffectContextHandle Context = Data.EffectSpec.GetContext();
+	UAbilitySystemComponent* Source = Context.GetOriginalInstigatorAbilitySystemComponent();
 
-	//const FGameplayTagContainer& SourceTags = *Data.EffectSpec.CapturedSourceTags.GetAggregatedTags();
+	const FGameplayTagContainer& SourceTags = *Data.EffectSpec.CapturedSourceTags.GetAggregatedTags();
 
-	//float DeltaValue{ 0.f };
+	float DeltaValue{ 0.f };
 
-	//if (Data.EvaluatedData.ModifierOp == EGameplayModOp::Type::Additive) {
-	//	DeltaValue = Data.EvaluatedData.Magnitude;
-	//}
+	if (Data.EvaluatedData.ModifierOp == EGameplayModOp::Type::Additive) {
+		DeltaValue = Data.EvaluatedData.Magnitude;
+	}
 
-	//ASBCharacterBase* TargetCharacter{ nullptr };
+	ASB_AICharacter* TargetCharacter{ nullptr };
 
-	//if (Data.Target.AbilityActorInfo.IsValid() && Data.Target.AbilityActorInfo->AvatarActor.IsValid()) {
-	//	AActor* TargetActor{ nullptr };
-	//	TargetActor = Data.Target.AbilityActorInfo->AvatarActor.Get();
-	//	TargetCharacter = Cast<ASBCharacterBase>(TargetActor);
-	//}
+	if (Data.Target.AbilityActorInfo.IsValid() && Data.Target.AbilityActorInfo->AvatarActor.IsValid()) {
+		AActor* TargetActor{ nullptr };
+		TargetActor = Data.Target.AbilityActorInfo->AvatarActor.Get();
+		TargetCharacter = Cast<ASB_AICharacter>(TargetActor);
+	}
 
 
-	//if (Data.EvaluatedData.Attribute == GetHealthAttribute()) {
-	//	SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+	if (Data.EvaluatedData.Attribute == GetAI_HealthAttribute()) {
+		SetAI_Health(FMath::Clamp(GetAI_Health(), 0.f, GetAI_MaxHealth()));
 
-	//	if (TargetCharacter) {
-	//		TargetCharacter->HandleHealthChanged(DeltaValue, SourceTags);
-	//	}
-	//}
+		if (TargetCharacter) {
+			TargetCharacter->HandleHealthChanged(DeltaValue, SourceTags);
+		}
+	}
 
 }
 

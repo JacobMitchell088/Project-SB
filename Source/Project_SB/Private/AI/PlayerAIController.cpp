@@ -5,5 +5,18 @@
 
 APlayerAIController::APlayerAIController()
 {
-	bWantsPlayerState = true;
+	bWantsPlayerState = false;
+
+	
+}
+
+void APlayerAIController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+}
+
+void APlayerAIController::BeginPlay()
+{
+	Super::BeginPlay();
+
 }

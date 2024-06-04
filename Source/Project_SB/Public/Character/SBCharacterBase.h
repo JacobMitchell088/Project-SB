@@ -99,6 +99,7 @@ protected:
 	virtual void HandleHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
 
 	friend UCharacterAttributeSetBase; // To allow us to use handlehealthchanged 
+	// friend UAI_AttributeSetBase; 
 
 	virtual void AddCharacterAbilities();
 

@@ -17,4 +17,9 @@ class PROJECT_SB_API APlayerAIController : public AAIController
 
 public:
 	APlayerAIController();
+
+
+protected:
+	virtual void OnPossess(APawn* InPawn) override;
+	virtual void BeginPlay() override;
 };
