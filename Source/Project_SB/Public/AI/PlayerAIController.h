@@ -24,4 +24,6 @@ protected:
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void BeginPlay() override;
 
+	// virtual void OnRep_Controller() override; // Possibly need to make this to call InitializeAttributes such that clients would receive up to date details on enemies 
+
 };

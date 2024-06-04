@@ -28,6 +28,7 @@ public:
 
 	UBehaviorTree* GetBehaviorTree() const;
 
+	virtual void PossessedBy(AController* NewController) override; // Will call InitializeAttributes()
 
 	class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
@@ -41,6 +42,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|AI", meta = (AllowPrivateAccess = "true"))
 	UBehaviorTree* Tree;
 
+	virtual void InitializeAttributes() override;
 
 
 	// PS Transferred For Net stability

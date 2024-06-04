@@ -9,7 +9,7 @@ ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : 
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 
-	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal); 
 
 	AI_AttributeSetBase = CreateDefaultSubobject<UAI_AttributeSetBase>(TEXT("AI_AttributeSetBase"));
 
@@ -18,8 +18,6 @@ ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : 
 	bAlwaysRelevant = true;
 	PrimaryActorTick.bCanEverTick = true;
 
-	//InitializeAttributes();
-	//AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth());
 
 }
 
@@ -46,6 +44,20 @@ UBehaviorTree* ASB_AICharacter::GetBehaviorTree() const
 	return Tree;
 }
 
+void ASB_AICharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	ASB_AICharacter* AIChar = Cast<ASB_AICharacter>(NewController->GetPawn());
+
+	if (AIChar) {
+		InitializeAttributes();
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("SB_AICharacter 'PossesedBy' Function failed to initialize attributes - Kimic"));
+	}
+}
+
 
 void ASB_AICharacter::Tick(float DeltaTime)
 {
@@ -60,6 +72,12 @@ void ASB_AICharacter::Die()
 UAbilitySystemComponent* ASB_AICharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+void ASB_AICharacter::InitializeAttributes()
+{
+	Super::InitializeAttributes();
+	AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth()); 
 }
 
 UAI_AttributeSetBase* ASB_AICharacter::GetAttributeSetBase() const
