@@ -49,4 +49,6 @@ Session.vim
 
 # Visual Studio
 .vs
-/Plugins/AdvancedSessions/Intermediate
+/Plugins/AdvancedSessions/Intermediate/**
+/Plugins/AdvancedSessions/Binaries/**
+Plugins/AdvancedSteamSessions/Intermediate/Build/Win64/UnrealEditor/Inc/AdvancedSteamSessions/Timestamp

@@ -57,6 +57,13 @@ void ASBCharacterBase::RemoveCharacterAbilities() {
 	bAbilitiesInitialized = false;
 }
 
+void ASBCharacterBase::HandleHealthChanged(float DeltaValue, const FGameplayTagContainer& EventTags)
+{
+	if (bAbilitiesInitialized) {
+		OnHealthChanged(DeltaValue, EventTags);
+	}
+}
+
 float ASBCharacterBase::GetCharacterLevel() const {
 
 	if (AttributeSetBase.IsValid()) {
@@ -164,6 +171,7 @@ void ASBCharacterBase::AddCharacterAbilities() {
 void ASBCharacterBase::InitializeAttributes() {
 
 	if (!AbilitySystemComponent.IsValid()) {
+		UE_LOG(LogTemp, Error, TEXT("%s() Invalid ASC In Initialize Attributes."), *FString(__FUNCTION__), *GetName());
 		return;
 	}
 

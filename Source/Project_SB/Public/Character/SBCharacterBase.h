@@ -93,6 +93,14 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "SB|Character")
 	void EnableRagdoll();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "SB|Events")
+	void OnHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
+
+	virtual void HandleHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
+
+	friend UCharacterAttributeSetBase; // To allow us to use handlehealthchanged 
+	// friend UAI_AttributeSetBase; 
+
 	virtual void AddCharacterAbilities();
 
 	virtual void InitializeAttributes();
