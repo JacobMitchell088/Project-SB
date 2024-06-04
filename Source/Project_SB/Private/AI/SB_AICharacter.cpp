@@ -13,6 +13,8 @@ ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : 
 
 	AI_AttributeSetBase = CreateDefaultSubobject<UAI_AttributeSetBase>(TEXT("AI_AttributeSetBase"));
 
+	DeadTag = FGameplayTag::RequestGameplayTag(FName("State.Dead"));
+
 	//AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	//AI_AttributeSetBase = CreateDefaultSubobject<UAI_AttributeSetBase>(TEXT("AI_AttributeSetBase"));
 
@@ -23,6 +25,14 @@ ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : 
 void ASB_AICharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (AbilitySystemComponent) {
+		AIHealthChangedDelegateHandle = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AI_AttributeSetBase->GetAI_HealthAttribute()).AddUObject(this, &ASB_AICharacter::AIHealthChanged);
+		AIMaxHealthChangedDelegateHandle = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AI_AttributeSetBase->GetAI_HealthAttribute()).AddUObject(this, &ASB_AICharacter::AIMaxHealthChanged);
+		
+
+		AbilitySystemComponent->RegisterGameplayTagEvent(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun")), EGameplayTagEventType::NewOrRemoved).AddUObject(this, &ASB_AICharacter::AIStunTagChanged);
+	}
 }
 
 void ASB_AICharacter::ApplyDamageAI(float DamageAmount)
@@ -64,4 +74,28 @@ float ASB_AICharacter::GetAIHealth() const
 float ASB_AICharacter::GetAIMaxHealth() const
 {
 	return AI_AttributeSetBase->GetAI_MaxHealth();
+}
+
+void ASB_AICharacter::AIHealthChanged(const FOnAttributeChangeData& Data)
+{
+	UE_LOG(LogTemp, Warning, TEXT("AI Health Changed"));
+}
+
+void ASB_AICharacter::AIMaxHealthChanged(const FOnAttributeChangeData& Data)
+{
+	UE_LOG(LogTemp, Warning, TEXT("AI Max Health Changed"));
+}
+
+void ASB_AICharacter::AIStunTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	if (NewCount > 0) {
+		FGameplayTagContainer AbilityTagsToCancel;
+		AbilityTagsToCancel.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability")));
+
+		FGameplayTagContainer AbilityTagsToIgnore;
+		AbilityTagsToIgnore.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.NotCanceledByStun")));
+
+		AbilitySystemComponent->CancelAbilities(&AbilityTagsToCancel, &AbilityTagsToIgnore);
+
+	}
 }

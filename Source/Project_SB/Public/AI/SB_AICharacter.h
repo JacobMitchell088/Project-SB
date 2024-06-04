@@ -70,21 +70,21 @@ protected:
 	FGameplayTag DeadTag;
 
 
-	//FDelegateHandle HealthChangedDelegateHandle;
-	//FDelegateHandle MaxHealthChangedDelegateHandle;
+	FDelegateHandle AIHealthChangedDelegateHandle;
+	FDelegateHandle AIMaxHealthChangedDelegateHandle;
 	//FDelegateHandle ManaChangedDelegateHandle;
 	//FDelegateHandle MaxManaChangedDelegateHandle;
 	//FDelegateHandle CharacterLevelChangedDelegateHandle;
 
 	//virtual void BeginPlay() override;
 
-	//virtual void HealthChanged(const FOnAttributeChangeData& Data);
-	//virtual void MaxHealthChanged(const FOnAttributeChangeData& Data);
+	virtual void AIHealthChanged(const FOnAttributeChangeData& Data);
+	virtual void AIMaxHealthChanged(const FOnAttributeChangeData& Data);
 	//virtual void ManaChanged(const FOnAttributeChangeData& Data);
 	//virtual void MaxManaChanged(const FOnAttributeChangeData& Data);
 	//virtual void CharacterLevelChanged(const FOnAttributeChangeData& Data);
 
 
-	//virtual void StunTagChanged(const FGameplayTag CallbackTag, int32 NewCount);
+	virtual void AIStunTagChanged(const FGameplayTag CallbackTag, int32 NewCount);
 
 };
