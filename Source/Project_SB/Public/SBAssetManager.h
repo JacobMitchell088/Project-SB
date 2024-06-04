@@ -15,7 +15,7 @@ class PROJECT_SB_API USBAssetManager : public UAssetManager
 	GENERATED_BODY()
 	
 public:
-	virtual void StartInitialLoading() override; // Attempting to setup GAS on bootup - Kimic
+	virtual void StartInitialLoading() override; // Attempting to setup GAS on bootup 
 
 
 };
