@@ -61,7 +61,7 @@ void ASB_AICharacter::PossessedBy(AController* NewController)
 	//else {
 	//	UE_LOG(LogTemp, Warning, TEXT("SB_AICharacter 'PossesedBy' Function failed to initialize attributes - Kimic"));
 	//}
-	InitializeAttributes();
+	// InitializeAttributes();
 }
 
 
@@ -85,10 +85,9 @@ void ASB_AICharacter::InitializeAttributes()
 	UE_LOG(LogTemp, Warning, TEXT("Attemping to Initialize Attributes For AI"));
 
 
-	
-	
+
 	ASBCharacterBase::AbilitySystemComponent = Cast<UCharacterAbilitySystemComponent>(GetAbilitySystemComponent()); // Prob don't need to cast if it's going to be same type
-	AttributeSetBase = Cast<UCharacterAttributeSetBase>(AI_AttributeSetBase);
+	//AttributeSetBase = Cast<UCharacterAttributeSetBase>(AI_AttributeSetBase);
 	if (ASBCharacterBase::AbilitySystemComponent.IsValid()) {
 		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ASC is now valid."), *FString(__FUNCTION__), *GetName());
 	}
@@ -96,12 +95,15 @@ void ASB_AICharacter::InitializeAttributes()
 		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ATSB is now valid."), *FString(__FUNCTION__), *GetName());
 	}
 
-	AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
+
+
+
+	ASB_AICharacter::AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
 	ASBCharacterBase::AbilitySystemComponent->SetTagMapCount(DeadTag, 0);
 
 
 
-	AbilitySystemComponent->InitAbilityActorInfo(GetController(), this); // maybe comment out
+	ASB_AICharacter::AbilitySystemComponent->InitAbilityActorInfo(GetController(), this); // maybe comment out
 	Super::InitializeAttributes();
 	AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth()); 
 
