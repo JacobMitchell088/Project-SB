@@ -31,20 +31,20 @@ void APlayerAIController::OnPossess(APawn* InPawn)
 
 
 
-	// Tree activation
-	if (ASB_AICharacter* const SB_AICharacter = Cast<ASB_AICharacter>(InPawn)) { // Throw in for behavior tree activation when an AI posses this pawn
+	//// Tree activation
+	//if (ASB_AICharacter* const SB_AICharacter = Cast<ASB_AICharacter>(InPawn)) { // Throw in for behavior tree activation when an AI posses this pawn
 
-		if (UBehaviorTree* const Tree = SB_AICharacter->GetBehaviorTree()) {
-			UBlackboardComponent* b;
-			UseBlackboard(Tree->BlackboardAsset, b);
-			Blackboard = b;
-			RunBehaviorTree(Tree);
-		}
-		else {
-			UE_LOG(LogTemp, Error, TEXT("Failure to see behavior tree"), *FString(__FUNCTION__), *GetName());
-		}
+	//	if (UBehaviorTree* const Tree = SB_AICharacter->GetBehaviorTree()) {
+	//		UBlackboardComponent* b;
+	//		UseBlackboard(Tree->BlackboardAsset, b);
+	//		Blackboard = b;
+	//		RunBehaviorTree(Tree);
+	//	}
+	//	else {
+	//		UE_LOG(LogTemp, Error, TEXT("Failure to see behavior tree"), *FString(__FUNCTION__), *GetName());
+	//	}
 
-	}
+	//}
 }
 
 void APlayerAIController::BeginPlay()

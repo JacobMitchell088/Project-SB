@@ -27,9 +27,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "SB|AI")
 	void ApplyDamageAI(float DamageAmount);
 
-	UBehaviorTree* GetBehaviorTree() const;
+	//UBehaviorTree* GetBehaviorTree() const;
 
-	virtual void PossessedBy(AController* NewController) override; // Will call InitializeAttributes()
+	virtual void PossessedBy(AController* NewController) override;
 
 	class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
@@ -42,8 +42,8 @@ protected:
 
 	friend UAI_AttributeSetBase; // Allow Attributes to use HandleHealthChanged(float DeltaValue, const struct FGameplayTagContainer& EventTags);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|AI", meta = (AllowPrivateAccess = "true"))
-	UBehaviorTree* Tree;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|AI", meta = (AllowPrivateAccess = "true"))
+	//UBehaviorTree* Tree;
 
 
 
