@@ -56,6 +56,7 @@ void ASBPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	BindASCInput();
 }
 
+// Server ASC Initilization
 void ASBPlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -219,6 +220,8 @@ void ASBPlayerCharacter::UpdateCameraPosition(float DeltaTime) // Come back to i
 	}
 }
 
+
+// Client ASC Initialization
 void ASBPlayerCharacter::OnRep_PlayerState() 
 {
 	Super::OnRep_PlayerState();
