@@ -33,6 +33,8 @@ public:
 
 	class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+	virtual void InitializeAttributes() override;
+
 protected:
 	virtual void Tick(float DeltaTime) override;
 
@@ -43,7 +45,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|AI", meta = (AllowPrivateAccess = "true"))
 	UBehaviorTree* Tree;
 
-	virtual void InitializeAttributes() override;
+
 
 
 	// PS Transferred For Net stability
@@ -60,14 +62,6 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "SB|AI|Attributes")
 	float GetAIMaxHealth() const;
 
-	//UFUNCTION(BlueprintCallable, Category = "SB|SBPlayerState|Attributes")
-	//float GetMana() const;
-
-	//UFUNCTION(BlueprintCallable, Category = "SB|SBPlayerState|Attributes")
-	//float GetMaxMana() const;
-
-	//UFUNCTION(BlueprintCallable, Category = "SB|SBPlayerState|Attributes")
-	//int32 GetCharacterLevel() const;
 
 protected:
 	UPROPERTY()
@@ -82,17 +76,11 @@ protected:
 
 	FDelegateHandle AIHealthChangedDelegateHandle;
 	FDelegateHandle AIMaxHealthChangedDelegateHandle;
-	//FDelegateHandle ManaChangedDelegateHandle;
-	//FDelegateHandle MaxManaChangedDelegateHandle;
-	//FDelegateHandle CharacterLevelChangedDelegateHandle;
 
-	//virtual void BeginPlay() override;
 
 	virtual void AIHealthChanged(const FOnAttributeChangeData& Data);
 	virtual void AIMaxHealthChanged(const FOnAttributeChangeData& Data);
-	//virtual void ManaChanged(const FOnAttributeChangeData& Data);
-	//virtual void MaxManaChanged(const FOnAttributeChangeData& Data);
-	//virtual void CharacterLevelChanged(const FOnAttributeChangeData& Data);
+
 
 
 	virtual void AIStunTagChanged(const FGameplayTag CallbackTag, int32 NewCount);

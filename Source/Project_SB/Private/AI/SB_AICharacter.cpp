@@ -32,7 +32,7 @@ void ASB_AICharacter::BeginPlay()
 		
 
 		AbilitySystemComponent->RegisterGameplayTagEvent(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun")), EGameplayTagEventType::NewOrRemoved).AddUObject(this, &ASB_AICharacter::AIStunTagChanged);
-		InitializeAttributes();
+		//InitializeAttributes();
 	}
 	else {
 		UE_LOG(LogTemp, Error, TEXT("%s() ASC Was INVALID at beginplay. Delegatehandles are now invalid."), *FString(__FUNCTION__), *GetName());
@@ -73,7 +73,7 @@ void ASB_AICharacter::Tick(float DeltaTime)
 
 void ASB_AICharacter::Die()
 {
-    Destroy();
+	Super::Die();
 }
 
 UAbilitySystemComponent* ASB_AICharacter::GetAbilitySystemComponent() const
@@ -89,12 +89,12 @@ void ASB_AICharacter::InitializeAttributes() // Morphed into initialize everythi
 
 	ASBCharacterBase::AbilitySystemComponent = Cast<UCharacterAbilitySystemComponent>(GetAbilitySystemComponent()); // Prob don't need to cast if it's going to be same type
 	// AttributeSetBase = Cast<UAttributeSet>(GetAttributeSetBase()); Our attribute of this character is not inherited or of type UCharacterAttributeSet, which is what this wants. Luckily we already have our own getters/setters
-	if (ASBCharacterBase::AbilitySystemComponent.IsValid()) {
-		UE_LOG(LogTemp, Warning, TEXT("%s() Base Character weak pointer ASC is now VALID."), *FString(__FUNCTION__), *GetName());
+	if (!ASBCharacterBase::AbilitySystemComponent.IsValid()) {
+		UE_LOG(LogTemp, Warning, TEXT("%s() Base Character weak pointer ASC is INVALID."), *FString(__FUNCTION__), *GetName());
 	}
-	//if (AttributeSetBase.IsValid()) {
-	//	UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ATSB is now valid."), *FString(__FUNCTION__), *GetName());
-	//}
+	if (!AttributeSetBase.IsValid()) {
+		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ATSB is INVALID."), *FString(__FUNCTION__), *GetName());
+	}
 
 
 
