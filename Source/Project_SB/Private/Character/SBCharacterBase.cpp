@@ -17,6 +17,8 @@ ASBCharacterBase::ASBCharacterBase(const class FObjectInitializer& ObjectInitial
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Overlap);
 
 	bAlwaysRelevant = true;
+	bReplicates = true;
+	SetReplicateMovement(true);
 
 	DeadTag = FGameplayTag::RequestGameplayTag(FName("State.Dead"));
 	EffectRemoveOnDeathTag = FGameplayTag::RequestGameplayTag(FName("State.RemoveOnDeath"));
