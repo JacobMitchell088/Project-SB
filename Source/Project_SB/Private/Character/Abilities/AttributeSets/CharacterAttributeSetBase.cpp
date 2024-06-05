@@ -4,6 +4,7 @@
 #include "Character/Abilities/AttributeSets/CharacterAttributeSetBase.h"
 #include "GameplayEffectExtension.h"
 #include "Character/Player/SBPlayerCharacter.h"
+#include "Character/SBCharacterBase.h" // Possibly dont need
 #include "Net/UnrealNetwork.h"
 
 
@@ -75,12 +76,12 @@ void UCharacterAttributeSetBase::PostGameplayEffectExecute(const FGameplayEffect
 		DeltaValue = Data.EvaluatedData.Magnitude;
 	}
 
-	ASBPlayerCharacter* TargetCharacter{ nullptr };
+	ASBCharacterBase* TargetCharacter{ nullptr };
 
 	if (Data.Target.AbilityActorInfo.IsValid() && Data.Target.AbilityActorInfo->AvatarActor.IsValid()) {
 		AActor* TargetActor{ nullptr };
 		TargetActor = Data.Target.AbilityActorInfo->AvatarActor.Get();
-		TargetCharacter = Cast<ASBPlayerCharacter>(TargetActor);
+		TargetCharacter = Cast<ASBCharacterBase>(TargetActor);
 	}
 
 

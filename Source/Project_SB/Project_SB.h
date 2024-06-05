@@ -10,6 +10,7 @@ enum class SBAbilityID : uint8 {
 	Confirm UMETA(DisplayName = "Confirm"),
 	Cancel UMETA(DisplayName = "Cancel"),
 	SpearThrow UMETA(DisplayName = "SpearThrow"),
+	RangedArrowPushback UMETA(DisplayName = "RangedArrowPushback"),
 	Ability1 UMETA(DisplayName = "Ability1"),
 	Ability2 UMETA(DisplayName = "Ability2"),
 	Ability3 UMETA(DisplayName = "Ability3"),

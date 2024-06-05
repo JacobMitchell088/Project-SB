@@ -26,6 +26,5 @@ public:
 
 	virtual void ReceiveDamage(UCharacterAbilitySystemComponent* SourceASC, float UnmitigatedDamage, float MitigatedDamage);
 
-	// Wedel Made This
 
 };

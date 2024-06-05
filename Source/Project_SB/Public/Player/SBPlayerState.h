@@ -50,7 +50,7 @@ public:
 
 protected:
 	UPROPERTY()
-	class UCharacterAbilitySystemComponent* AbilitySystemComponent;
+	class UCharacterAbilitySystemComponent* AbilitySystemComponent; // Possible bug might need to be type UAbilitySystemComponent*
 
 	UPROPERTY()
 	class UCharacterAttributeSetBase* AttributeSetBase;

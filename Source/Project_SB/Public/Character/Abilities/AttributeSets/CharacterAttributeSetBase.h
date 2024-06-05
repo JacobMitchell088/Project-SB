@@ -45,9 +45,9 @@ public:
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, MaxMana)
 
 
-		// Damage is a meta attribute used by the DamageExecution to calculate final damage
-		// Temporary value that only exists on the server. Not replicated.
-		UPROPERTY(BlueprintReadOnly, Category = "Damage")
+	// Damage is a meta attribute used by the DamageExecution to calculate final damage
+	// Temporary value that only exists on the server. Not replicated.
+	UPROPERTY(BlueprintReadOnly, Category = "Damage")
 	FGameplayAttributeData Damage;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSetBase, Damage)
 

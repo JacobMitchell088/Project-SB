@@ -49,4 +49,7 @@ Session.vim
 
 # Visual Studio
 .vs
-/Plugins/AdvancedSessions/Intermediate
+/Plugins/AdvancedSessions/Intermediate/**
+/Plugins/AdvancedSessions/Binaries/**
+/Plugins/AdvancedSteamSessions/Intermediate/**
+/Plugins/AdvancedSteamSessions/Binaries/**

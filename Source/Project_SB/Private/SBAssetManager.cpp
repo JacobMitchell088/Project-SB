@@ -7,5 +7,5 @@
 void USBAssetManager::StartInitialLoading() {
 	Super::StartInitialLoading();
 	UAbilitySystemGlobals::Get().InitGlobalData();
-	UE_LOG(LogTemp, Warning, TEXT("Using GAS System - Kimic"));
+	UE_LOG(LogTemp, Warning, TEXT("Using GAS System"));
 }
