@@ -104,7 +104,7 @@ void ASB_AICharacter::InitializeAttributes() // Morphed into initialize everythi
 
 	
 
-	ASB_AICharacter::AbilitySystemComponent->InitAbilityActorInfo(GetController(), this); // maybe comment out
+	ASB_AICharacter::AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Super::InitializeAttributes();
 	AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth()); 
 
