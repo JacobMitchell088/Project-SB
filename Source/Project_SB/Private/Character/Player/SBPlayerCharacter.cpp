@@ -166,7 +166,10 @@ void ASBPlayerCharacter::RotateToFaceCursor()
 		FVector WorldMousePosition = MouseLocation + MouseDirection * (FVector::DotProduct(CharacterLocation - MouseLocation, FVector::UpVector) / FVector::DotProduct(MouseDirection, FVector::UpVector));
 
 		FRotator NewRotation = UKismetMathLibrary::FindLookAtRotation(CharacterLocation, WorldMousePosition);
-		SetActorRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); // Possibly try PlayerController->SetControlRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); To obtain a smoother turn rather than instant
+		// SetActorRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); // Possibly try PlayerController->SetControlRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f)); To obtain a smoother turn rather than instant
+		OurPlayerController->SetControlRotation(FRotator(0.0f, NewRotation.Yaw, 0.0f));
+
+
 	}
 
 }

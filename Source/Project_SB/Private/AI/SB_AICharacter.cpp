@@ -44,10 +44,10 @@ void ASB_AICharacter::ApplyDamageAI(float DamageAmount)
 
 }
 
-UBehaviorTree* ASB_AICharacter::GetBehaviorTree() const
-{
-	return Tree;
-}
+//UBehaviorTree* ASB_AICharacter::GetBehaviorTree() const
+//{
+//	return Tree;
+//}
 
 void ASB_AICharacter::PossessedBy(AController* NewController)
 {
@@ -90,7 +90,7 @@ void ASB_AICharacter::InitializeAttributes() // Morphed into initialize everythi
 	ASBCharacterBase::AbilitySystemComponent = Cast<UCharacterAbilitySystemComponent>(GetAbilitySystemComponent()); // Prob don't need to cast if it's going to be same type
 	// AttributeSetBase = Cast<UAttributeSet>(GetAttributeSetBase()); Our attribute of this character is not inherited or of type UCharacterAttributeSet, which is what this wants. Luckily we already have our own getters/setters
 	if (!ASBCharacterBase::AbilitySystemComponent.IsValid()) {
-		UE_LOG(LogTemp, Warning, TEXT("%s() Base Character weak pointer ASC is INVALID."), *FString(__FUNCTION__), *GetName());
+		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ASC is INVALID."), *FString(__FUNCTION__), *GetName());
 	}
 	if (!AttributeSetBase.IsValid()) {
 		UE_LOG(LogTemp, Error, TEXT("%s() Base Character weak pointer ATSB is INVALID."), *FString(__FUNCTION__), *GetName());
@@ -104,7 +104,7 @@ void ASB_AICharacter::InitializeAttributes() // Morphed into initialize everythi
 
 	
 
-	ASB_AICharacter::AbilitySystemComponent->InitAbilityActorInfo(GetController(), this); // maybe comment out
+	ASB_AICharacter::AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Super::InitializeAttributes();
 	AI_AttributeSetBase->SetAI_Health(GetAIMaxHealth()); 
 
