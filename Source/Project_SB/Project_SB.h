@@ -12,6 +12,7 @@ enum class SBAbilityID : uint8 {
 	SpearThrow UMETA(DisplayName = "SpearThrow"),
 	RangedArrowPushback UMETA(DisplayName = "RangedArrowPushback"),
 	DashBlink UMETA(DisplayName = "DashBlink"),
+	ArcaneMissiles UMETA(DisplayName = "ArcaneMissiles"),
 	Ability1 UMETA(DisplayName = "Ability1"),
 	Ability2 UMETA(DisplayName = "Ability2"),
 	Ability3 UMETA(DisplayName = "Ability3"),
