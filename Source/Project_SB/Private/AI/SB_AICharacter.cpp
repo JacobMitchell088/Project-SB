@@ -141,17 +141,19 @@ float ASB_AICharacter::GetAIMaxHealth() const
 
 void ASB_AICharacter::AIHealthChanged(const FOnAttributeChangeData& Data)
 {
-	UE_LOG(LogTemp, Warning, TEXT("AI Health Changed"));
+	//UE_LOG(LogTemp, Warning, TEXT("AI Health Changed"));
 }
 
 void ASB_AICharacter::AIMaxHealthChanged(const FOnAttributeChangeData& Data)
 {
-	UE_LOG(LogTemp, Warning, TEXT("AI Max Health Changed"));
+	//UE_LOG(LogTemp, Warning, TEXT("AI Max Health Changed"));
 }
 
 void ASB_AICharacter::OnGameplayEffectApplied(UAbilitySystemComponent* SourceASC, const FGameplayEffectSpec& Spec, FActiveGameplayEffectHandle ActiveHandle) // Event listener for when we receive tags such as stun
 {
-	if (Spec.Def->InheritableGameplayEffectTags.CombinedTags.HasTag(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun")))) {
+	//UE_LOG(LogTemp, Warning, TEXT("Event gameplay effect added detected"), *FString(__FUNCTION__), *GetName());
+	if (AbilitySystemComponent->GetGameplayTagCount(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun"))) > 0) {
+		//UE_LOG(LogTemp, Warning, TEXT("Has tag stunned, call handle stun functions"), *FString(__FUNCTION__), *GetName());
 		bIsStunned = true;
 		MovementUpdate();
 	}
@@ -160,8 +162,9 @@ void ASB_AICharacter::OnGameplayEffectApplied(UAbilitySystemComponent* SourceASC
 void ASB_AICharacter::OnGameplayEffectRemoved(const FActiveGameplayEffect& EffectRemoved)
 {
 	const FGameplayEffectSpec& Spec = EffectRemoved.Spec;
-
-	if (Spec.Def->InheritableGameplayEffectTags.CombinedTags.HasTag(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun")))) {
+	//UE_LOG(LogTemp, Warning, TEXT("Event gameplay effect removed detected"), *FString(__FUNCTION__), *GetName());
+	if (AbilitySystemComponent->GetGameplayTagCount(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun"))) == 0) {
+		//UE_LOG(LogTemp, Warning, TEXT("Removed tag is stunned tag. Call handle stun function."), *FString(__FUNCTION__), *GetName());
 		bIsStunned = false;
 		MovementUpdate();
 	}
