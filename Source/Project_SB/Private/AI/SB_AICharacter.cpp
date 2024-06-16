@@ -2,6 +2,8 @@
 
 
 #include "AI/SB_AICharacter.h"
+#include "AIController.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -17,8 +19,13 @@ ASB_AICharacter::ASB_AICharacter(const FObjectInitializer& ObjectInitializer) : 
 
 	bAlwaysRelevant = true;
 	PrimaryActorTick.bCanEverTick = true;
+	bIsStunned = false;
 
 
+	if (AbilitySystemComponent) {
+		AbilitySystemComponent->OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &ASB_AICharacter::OnGameplayEffectApplied); // Bind event listener for tags
+		AbilitySystemComponent->OnAnyGameplayEffectRemovedDelegate().AddUObject(this, &ASB_AICharacter::OnGameplayEffectRemoved);
+	}
 }
 
 void ASB_AICharacter::BeginPlay()
@@ -134,13 +141,59 @@ float ASB_AICharacter::GetAIMaxHealth() const
 
 void ASB_AICharacter::AIHealthChanged(const FOnAttributeChangeData& Data)
 {
-	UE_LOG(LogTemp, Warning, TEXT("AI Health Changed"));
+	//UE_LOG(LogTemp, Warning, TEXT("AI Health Changed"));
 }
 
 void ASB_AICharacter::AIMaxHealthChanged(const FOnAttributeChangeData& Data)
 {
-	UE_LOG(LogTemp, Warning, TEXT("AI Max Health Changed"));
+	//UE_LOG(LogTemp, Warning, TEXT("AI Max Health Changed"));
 }
+
+void ASB_AICharacter::OnGameplayEffectApplied(UAbilitySystemComponent* SourceASC, const FGameplayEffectSpec& Spec, FActiveGameplayEffectHandle ActiveHandle) // Event listener for when we receive tags such as stun
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Event gameplay effect added detected"), *FString(__FUNCTION__), *GetName());
+	if (AbilitySystemComponent->GetGameplayTagCount(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun"))) > 0) {
+		//UE_LOG(LogTemp, Warning, TEXT("Has tag stunned, call handle stun functions"), *FString(__FUNCTION__), *GetName());
+		bIsStunned = true;
+		MovementUpdate();
+	}
+}
+
+void ASB_AICharacter::OnGameplayEffectRemoved(const FActiveGameplayEffect& EffectRemoved)
+{
+	const FGameplayEffectSpec& Spec = EffectRemoved.Spec;
+	//UE_LOG(LogTemp, Warning, TEXT("Event gameplay effect removed detected"), *FString(__FUNCTION__), *GetName());
+	if (AbilitySystemComponent->GetGameplayTagCount(FGameplayTag::RequestGameplayTag(FName("State.Debuff.Stun"))) == 0) {
+		//UE_LOG(LogTemp, Warning, TEXT("Removed tag is stunned tag. Call handle stun function."), *FString(__FUNCTION__), *GetName());
+		bIsStunned = false;
+		MovementUpdate();
+	}
+}
+
+void ASB_AICharacter::MovementUpdate() // Called when we are either stunned or unstunned
+{
+	AAIController* AIController = Cast<AAIController>(GetController());
+
+	if (bIsStunned) { // When getting stunned
+		if (AIController) {
+			AIController->StopMovement();
+
+			UBlackboardComponent* BlackboardComp = AIController->GetBlackboardComponent();
+			if (BlackboardComp) {
+				BlackboardComp->SetValueAsBool("IsStunned", true);
+			}
+		}
+	}
+	else { // When getting unstunned
+		if (AIController) {
+			UBlackboardComponent* BlackboardComp = AIController->GetBlackboardComponent();
+			if (BlackboardComp) {
+				BlackboardComp->SetValueAsBool("IsStunned", false);
+			}
+		}
+	}
+}
+
 
 void ASB_AICharacter::AIStunTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
 {

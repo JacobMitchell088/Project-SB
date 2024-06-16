@@ -7,14 +7,28 @@
 UENUM(BlueprintType)
 enum class SBAbilityID : uint8 {
 	None UMETA(DisplayName = "None"),
+
 	Confirm UMETA(DisplayName = "Confirm"),
+
 	Cancel UMETA(DisplayName = "Cancel"),
+
 	SpearThrow UMETA(DisplayName = "SpearThrow"),
+
 	RangedArrowPushback UMETA(DisplayName = "RangedArrowPushback"),
+
 	DashBlink UMETA(DisplayName = "DashBlink"),
+
 	ArcaneMissiles UMETA(DisplayName = "ArcaneMissiles"),
+
 	BloodOrb UMETA(DisplayName = "BloodOrb"),
+
 	AhriQ UMETA(DisplayName = "AhriQ"),
+
+	RollingBall UMETA(DisplayName = "RollingBall"),
+
+
+
+
 	Ability1 UMETA(DisplayName = "Ability1"),
 	Ability2 UMETA(DisplayName = "Ability2"),
 	Ability3 UMETA(DisplayName = "Ability3"),

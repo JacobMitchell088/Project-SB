@@ -35,7 +35,10 @@ public:
 
 	virtual void InitializeAttributes() override;
 
+	
+
 protected:
+	bool bIsStunned;
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void Die() override;
@@ -45,7 +48,8 @@ protected:
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SB|AI", meta = (AllowPrivateAccess = "true"))
 	//UBehaviorTree* Tree;
 
-
+	
+	
 
 
 	// PS Transferred For Net stability
@@ -62,8 +66,6 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "SB|AI|Attributes")
 	float GetAIMaxHealth() const;
 
-
-protected:
 	UPROPERTY()
 	class UCharacterAbilitySystemComponent* AbilitySystemComponent;
 
@@ -81,8 +83,20 @@ protected:
 	virtual void AIHealthChanged(const FOnAttributeChangeData& Data);
 	virtual void AIMaxHealthChanged(const FOnAttributeChangeData& Data);
 
+	UFUNCTION()
+	void OnGameplayEffectApplied(UAbilitySystemComponent* SourceASC, const FGameplayEffectSpec& Spec, FActiveGameplayEffectHandle ActiveHandle);
+	UFUNCTION()
+	void OnGameplayEffectRemoved(const FActiveGameplayEffect& EffectRemoved);
 
 
-	virtual void AIStunTagChanged(const FGameplayTag CallbackTag, int32 NewCount);
+	virtual void AIStunTagChanged(const FGameplayTag CallbackTag, int32 NewCount); // i dont remember why I wrote this
+
+	
+
+private:
+	void MovementUpdate();
+	//void HandleStunnedTagRemoved();
+
+
 
 };
