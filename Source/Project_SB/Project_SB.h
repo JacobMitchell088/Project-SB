@@ -26,6 +26,8 @@ enum class SBAbilityID : uint8 {
 
 	RollingBall UMETA(DisplayName = "RollingBall"),
 
+	LightningSwap UMETA(DisplayName = "LightningSwap"),
+
 
 
 
